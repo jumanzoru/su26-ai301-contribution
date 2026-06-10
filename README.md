@@ -1,15 +1,17 @@
 # Contribution [#]: [Issue Title]
 
-**Contribution Number:** [1 / 2 / 3]  
-**Student:** [Your Name]  
-**Issue:** [GitHub issue link]  
-**Status:** [Phase I / Phase II / Phase III / Phase IV] [In Progress / Complete]
+**Contribution Number:** 1  
+**Student:** Jefferson Umanzor  
+**Issue:** [[GitHub issue link]  ](https://github.com/backstage/community-plugins/issues/5994)  
+**Status:** Phase I Complete  
 
 ---
 
 ## Why I Chose This Issue
 
-[1-2 paragraphs explaining why this issue interests you, how it matches your skills/learning goals, what you hope to learn]
+I chose this issue because it aligns strongly with my SWE goals & gives me experience contributing to a large TypeScript monorepo in the Backstage developer-platform ecosystem. The work involves repository tooling, deprecated API detection, plugin maintenance, & following existing contribution patterns in a production open-source codebase.
+
+I'm especially interested in the `vault` workspace because Vault is related to infrastructure & secrets management, which gives the contribution a stronger backend/platform engineering angle than a purely frontend cleanup. My goal is to use this issue to practice reading an established codebase, running project tooling, identifying deprecated API usage, & making a focused PR that improves long-term maintainability.
 
 ---
 
@@ -17,19 +19,26 @@
 
 ### Problem Description
 
-[In your own words, what's broken or missing?]
+The Backstage community-plugins maintainers are enabling `listDeprecations` checks across maintainer-owned workspaces so deprecated Backstage APIs can be identified and removed. Some workspaces, including `vault`, haven't opted into this check yet. Without this tooling enabled, deprecated API usage can remain hidden & make the plugin harder to maintain as Backstage evolves.
 
 ### Expected Behavior
 
-[What should happen?]
+The `vault` workspace should have `listDeprecations` enabled in its `bcp.json` configuration. After enabling it, running `yarn backstage-cli repo list-deprecations` should identify any deprecated API usage in the workspace. Any reported deprecated usages should be updated so the workspace follows current Backstage APIs.
 
 ### Current Behavior
 
-[What actually happens?]
+The vault workspace currently has a `bcp.json` file with `autoVersionBump` and `knipReports`, but it doesn't include `"listDeprecations": true`. Because of that, the workspace isn't opted into the deprecation-checking workflow.
 
 ### Affected Components
 
-[Which parts of the codebase are involved?]
+The main affected component is the `vault` workspace inside the Backstage community-plugins monorepo.
+
+Potentially affected file:
+- `workspaces/vault/bcp.json`
+
+Other affected files may be identified in Phase II after running:
+- `yarn install`
+- `yarn backstage-cli repo list-deprecations`
 
 ---
 
