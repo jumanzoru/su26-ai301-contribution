@@ -1,4 +1,4 @@
-# Contribution [#]: [Issue Title]
+# Contribution 1: Enable `listDeprecations` for Backstage Vault Workspace
 
 **Contribution Number:** 1  
 **Student:** Jefferson Umanzor  
