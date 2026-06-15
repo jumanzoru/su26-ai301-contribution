@@ -46,19 +46,26 @@ Other affected files may be identified in Phase II after running:
 
 ### Environment Setup
 
-[Notes on setting up your local development environment - challenges you faced, how you solved them]
+I cloned my fork of the Backstage `community-plugins` repository, created a working branch, and inspected the `vault` workspace configuration for issue #5994.
 
 ### Steps to Reproduce
 
-1. [Step 1]
-2. [Step 2]
-3. [Observed result]
+1. Fork and clone the Backstage community-plugins repository.
+2.  Create a working branch in the fork.
+3.  Open the vault workspace configuration file:
+     - workspaces/vault/bcp.json
+4. Inspect the current configuration.
+5. Observe that workspaces/vault/bcp.json includes existing tooling options such as autoVersionBump and knipReports, but does not include "listDeprecations": true.
+6. Compare this with the issue requirement, which asks for listDeprecations to be enabled for the vault workspace.
+7. Expected behavior: the vault workspace should include "listDeprecations": true so deprecated Backstage API usage can be detected.
+8. Actual behavior: the vault workspace is missing the listDeprecations configuration.
 
 ### Reproduction Evidence
 
-- **Commit showing reproduction:** [Link to commit in your fork]
-- **Screenshots/logs:** [If applicable]
-- **My findings:** [What you discovered during reproduction]
+- Working branch: [paste your fork branch link here]
+- Issue: https://github.com/backstage/community-plugins/issues/5994
+- Relevant file: workspaces/vault/bcp.json
+- Finding: This is a repository tooling/configuration issue. The vault workspace has not opted into the listDeprecations check, so the likely fix is to update workspaces/vault/bcp.json by adding "listDeprecations": true.
 
 ---
 
@@ -66,30 +73,32 @@ Other affected files may be identified in Phase II after running:
 
 ### Analysis
 
-[Your analysis of the root cause - what's causing the issue?]
+The root cause is that the vault workspace configuration is missing the listDeprecations option in workspaces/vault/bcp.json.
 
 ### Proposed Solution
 
-[High-level description of your fix approach]
+Add "listDeprecations": true to workspaces/vault/bcp.json, following the existing configuration style used in the file and in other workspaces.
 
 ### Implementation Plan
 
 Using UMPIRE framework (adapted):
 
-**Understand:** [Restate the problem]
+**Understand:** The issue asks for the vault workspace to opt into Backstage’s deprecation-checking workflow.
 
-**Match:** [What similar patterns/solutions exist in the codebase?]
+**Match:** I will compare workspaces/vault/bcp.json with other workspace bcp.json files that already include listDeprecations.
 
 **Plan:** [Step-by-step implementation plan]
-1. [Modify file X to do Y]
-2. [Add function Z]
-3. [Update tests]
+1. Open workspaces/vault/bcp.json.
+2. Add "listDeprecations": true alongside the existing workspace tooling options.
+3. Run the relevant repo validation/deprecation command.
+4. If the command reports deprecated API usage, inspect whether those changes are in scope.
+5. Commit the focused configuration change to my working branch.
 
-**Implement:** [Link to your branch/commits as you work]
+**Implement:** Working branch: [(https://github.com/jumanzoru/community-plugins/tree/enable-list-deprecations-vault)]
 
-**Review:** [Self-review checklist - does it follow the project's contribution guidelines?]
+**Review:** Before opening a PR, I will confirm the change follows the repo’s existing JSON/configuration style and does not include unrelated cleanup.
 
-**Evaluate:** [How will you verify it works?]
+**Evaluate:** I will verify the change by running the relevant Backstage deprecation-checking workflow and confirming the workspace is included without introducing unexpected failures.
 
 ---
 
