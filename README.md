@@ -3,7 +3,7 @@
 **Contribution Number:** 1  
 **Student:** Jefferson Umanzor  
 **Issue:** [[GitHub issue link]  ](https://github.com/backstage/community-plugins/issues/5994)  
-**Status:** Phase I Complete  
+**Status:** Phase III Complete  
 
 ---
 
@@ -62,7 +62,7 @@ I cloned my fork of the Backstage `community-plugins` repository, created a work
 
 ### Reproduction Evidence
 
-- Working branch: [paste your fork branch link here]
+- Working branch: https://github.com/jumanzoru/community-plugins/tree/enable-list-deprecations-vault
 - Issue: https://github.com/backstage/community-plugins/issues/5994
 - Relevant file: workspaces/vault/bcp.json
 - Finding: This is a repository tooling/configuration issue. The vault workspace has not opted into the listDeprecations check, so the likely fix is to update workspaces/vault/bcp.json by adding "listDeprecations": true.
@@ -94,7 +94,7 @@ Using UMPIRE framework (adapted):
 4. If the command reports deprecated API usage, inspect whether those changes are in scope.
 5. Commit the focused configuration change to my working branch.
 
-**Implement:** Working branch: [(https://github.com/jumanzoru/community-plugins/tree/enable-list-deprecations-vault)]
+**Implement:** Working branch: https://github.com/jumanzoru/community-plugins/tree/enable-list-deprecations-vault
 
 **Review:** Before opening a PR, I will confirm the change follows the repo’s existing JSON/configuration style and does not include unrelated cleanup.
 
@@ -106,18 +106,26 @@ Using UMPIRE framework (adapted):
 
 ### Unit Tests
 
-- [ ] Test case 1: [Description]
-- [ ] Test case 2: [Description]
-- [ ] Test case 3: [Description]
+No unit tests were added for this phase because the change is a workspace configuration update rather than a code-path or function-level behavior change.
 
 ### Integration Tests
 
-- [ ] Integration scenario 1
-- [ ] Integration scenario 2
+No integration tests were added for this phase. The relevant validation is the repository-level deprecation-checking workflow, which is run through the Backstage CLI instead of a traditional integration test.
 
 ### Manual Testing
 
-[What you tested manually and results]
+I installed the project dependencies and ran the relevant Backstage deprecation-checking command:
+
+`yarn backstage-cli repo list-deprecations`
+
+The command started successfully, but it failed while linting `workspaces/rbac/eslint.frontend-shared.cjs` due to an ESLint parser configuration issue involving the `deprecation/deprecation` rule and missing TypeScript parser services.
+
+Because this failure occurred in the `rbac` workspace rather than the `vault` workspace, I treated it as a repository-level validation blocker rather than evidence that my `vault` configuration change was incorrect.
+
+I also manually verified that the intended change is limited to the `vault` workspace configuration:
+- Relevant file: `workspaces/vault/bcp.json`
+- Change made: added `"listDeprecations": true`
+- Scope: focused configuration change only, no unrelated cleanup
 
 ---
 
@@ -134,7 +142,7 @@ Using UMPIRE framework (adapted):
 ### Code Changes
 
 - **Files modified:** [List]
-- **Key commits:** [Links to important commits]
+- **Key commit:** https://github.com/jumanzoru/community-plugins/commit/4c0dba435
 - **Approach decisions:** [Why you chose certain approaches]
 
 ---
