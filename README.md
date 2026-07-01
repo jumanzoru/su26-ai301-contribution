@@ -3,7 +3,7 @@
 **Contribution Number:** 1  
 **Student:** Jefferson Umanzor  
 **Issue:** [[GitHub issue link]  ](https://github.com/backstage/community-plugins/issues/5994)  
-**Status:** Phase III Complete  
+**Status:** Phase IV Complete / Awaiting Review
 
 ---
 
@@ -62,7 +62,7 @@ I cloned my fork of the Backstage `community-plugins` repository, created a work
 
 ### Reproduction Evidence
 
-- Working branch: https://github.com/jumanzoru/community-plugins/tree/enable-list-deprecations-vault
+- Working branch: https://github.com/jumanzoru/community-plugins/tree/vault/list-deprecations
 - Issue: https://github.com/backstage/community-plugins/issues/5994
 - Relevant file: workspaces/vault/bcp.json
 - Finding: This is a repository tooling/configuration issue. The vault workspace has not opted into the listDeprecations check, so the likely fix is to update workspaces/vault/bcp.json by adding "listDeprecations": true.
@@ -94,7 +94,7 @@ Using UMPIRE framework (adapted):
 4. If the command reports deprecated API usage, inspect whether those changes are in scope.
 5. Commit the focused configuration change to my working branch.
 
-**Implement:** Working branch: https://github.com/jumanzoru/community-plugins/tree/enable-list-deprecations-vault
+**Implement:** Working branch: https://github.com/jumanzoru/community-plugins/tree/vault/list-deprecations
 
 **Review:** Before opening a PR, I will confirm the change follows the repo’s existing JSON/configuration style and does not include unrelated cleanup.
 
@@ -131,33 +131,31 @@ I also manually verified that the intended change is limited to the `vault` work
 
 ## Implementation Notes
 
-### Week [X] Progress
+## Implementation Notes
 
-[What you built this week, challenges faced, decisions made]
+### Week 4 Progress
 
-### Week [Y] Progress
-
-[Continue documenting as you work]
+I implemented the focused configuration change for Backstage community-plugins issue #5994. I updated `workspaces/vault/bcp.json` to enable `listDeprecations` for the `vault` workspace.
 
 ### Code Changes
 
-- **Files modified:** [List]
-- **Key commit:** https://github.com/jumanzoru/community-plugins/commit/4c0dba435
-- **Approach decisions:** [Why you chose certain approaches]
+- **Files modified:** `workspaces/vault/bcp.json`
+- **Key commit:** https://github.com/jumanzoru/community-plugins/commit/71648d33e
+- **Approach decision:** I kept the change scoped to the `vault` workspace configuration and did not include unrelated cleanup.
 
 ---
 
 ## Pull Request
 
-**PR Link:** [GitHub PR URL when submitted]
+**PR Link:** https://github.com/backstage/community-plugins/pull/9724
 
-**PR Description:** [Draft or final PR description - much of the content above can be adapted]
+**PR Description:**  
+This PR enables `listDeprecations` for the Backstage `vault` workspace by adding `"listDeprecations": true` to `workspaces/vault/bcp.json`.
 
 **Maintainer Feedback:**
-- [Date]: [Summary of feedback received]
-- [Date]: [How you addressed it]
+- No maintainer feedback yet.
 
-**Status:** [Awaiting review / Iterating / Approved / Merged]
+**Status:** Awaiting review
 
 ---
 
